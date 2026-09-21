@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+output/*.txt
+output/*.ogg
+output/*.json
+output/*.mp3
+output/*.wav
+.env
+.DS_Store
