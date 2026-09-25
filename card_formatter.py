@@ -54,7 +54,6 @@ def format_whatsapp_card(
     title_malayalam: str,
     subtitle_malayalam: Optional[str] = None,
     khatib: str = "ഡോ. ശൈഖ് ഉസാമ ബിൻ അബ്ദുള്ള ഖയ്യാത്വ്",
-    location: str = "മസ്ജിദുൽ ഹറാം, മക്ക",
     target_date: Optional[datetime] = None,
 ) -> str:
     """Format the full WhatsApp metadata card."""
@@ -73,7 +72,6 @@ def format_whatsapp_card(
 
     card_lines = [
         "🕌 *മസ്ജിദുൽ ഹറാം ജുമുഅ ഖുതുബ* 📖",
-        "🌹🌹🌹🌹",
         "",
         f"*{title_malayalam}*",
     ]
@@ -89,7 +87,6 @@ def format_whatsapp_card(
         hijri_month_str,
         "",
         f"⚡ ഖതീബ് : {khatib}",
-        f"⚡ സ്ഥലം : {location}",
         "➖➖➖➖➖➖➖➖➖➖",
     ])
 

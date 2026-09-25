@@ -62,7 +62,6 @@ def parse_metadata_and_body(response_text: str) -> Tuple[Dict[str, str], str]:
         "title_malayalam": "ഉപജീവനവും അല്ലാഹുവിലുള്ള ഭരമേല്പിക്കലും",
         "subtitle_malayalam": "തവക്കുലും അനുവദനീയ സമ്പാദ്യവും",
         "khatib": "ഡോ. ശൈഖ് ഉസാമ ബിൻ അബ്ദുള്ള ഖയ്യാത്വ്",
-        "location": "മസ്ജിദുൽ ഹറാം, മക്ക",
     }
     body = response_text.strip()
 
@@ -216,7 +215,6 @@ def main():
                 "title_malayalam": "ഉപജീവനവും അല്ലാഹുവിലുള്ള ഭരമേല്പിക്കലും",
                 "subtitle_malayalam": "തവക്കുലും അനുവദനീയ സമ്പാദ്യവും",
                 "khatib": "ഡോ. ശൈഖ് ഉസാമ ബിൻ അബ്ദുള്ള ഖയ്യാത്വ്",
-                "location": "മസ്ജിദുൽ ഹറാം, മക്ക",
             }
 
     # Step 2: TTS
@@ -228,7 +226,6 @@ def main():
         title_malayalam=metadata.get("title_malayalam", "ജുമുഅ ഖുതുബ"),
         subtitle_malayalam=metadata.get("subtitle_malayalam"),
         khatib=metadata.get("khatib", "ഖതീബ്"),
-        location=metadata.get("location", "മസ്ജിദുൽ ഹറാം, മക്ക"),
     )
 
     print("\n--- [WhatsApp Card Preview] ---")
