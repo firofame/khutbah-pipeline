@@ -1,8 +1,7 @@
 """Utilities for generating WhatsApp header cards with dates, Hijri calendar, and durations."""
 
-import subprocess
+import math
 from datetime import datetime
-from pathlib import Path
 from typing import Optional
 
 try:
@@ -53,22 +52,23 @@ def to_small_caps(text: str) -> str:
 def format_whatsapp_card(
     title_malayalam: str,
     subtitle_malayalam: Optional[str] = None,
-    khatib: str = "ഡോ. ശൈഖ് ഉസാമ ബിൻ അബ്ദുള്ള ഖയ്യാത്വ്",
+    khatib: str = "ഖതീബ് വ്യക്തമാക്കിയിട്ടില്ല",
     target_date: Optional[datetime] = None,
+    duration_seconds: Optional[float] = None,
 ) -> str:
     """Format the full WhatsApp metadata card."""
     dt = target_date or datetime.now()
     gregorian_date_str = dt.strftime("%d-%m-%Y")
     weekday_ml = MALAYALAM_WEEKDAYS.get(dt.weekday(), "")
 
-    if Gregorian:
-        hijri = Gregorian(dt.year, dt.month, dt.day).to_hijri()
-        hijri_year = hijri.year
-        month_name = HIJRI_MONTH_NAMES_EN.get(hijri.month, f"Month {hijri.month}")
-        hijri_month_str = f"{to_small_caps(month_name)} - {hijri.day:02d}"
-    else:
-        hijri_year = 1448
-        hijri_month_str = "ʀᴀʙᴇᴇ-ᴜʟ ᴀᴡᴡᴀʟ - 22"
+    if Gregorian is None:
+        raise RuntimeError("Hijri date conversion is unavailable; restore the project's dependencies.")
+    hijri = Gregorian(dt.year, dt.month, dt.day).to_hijri()
+    hijri_year = hijri.year
+    month_name = HIJRI_MONTH_NAMES_EN[hijri.month]
+    hijri_month_str = f"{to_small_caps(month_name)} - {hijri.day:02d}"
+    if duration_seconds is not None and (not math.isfinite(duration_seconds) or duration_seconds <= 0):
+        raise ValueError("Audio duration must be positive and finite.")
 
     card_lines = [
         "🕌 *മസ്ജിദുൽ ഹറാം ജുമുഅ ഖുതുബ* 📖",
@@ -87,7 +87,10 @@ def format_whatsapp_card(
         hijri_month_str,
         "",
         f"⚡ ഖതീബ് : {khatib}",
-        "➖➖➖➖➖➖➖➖➖➖",
     ])
+    if duration_seconds is not None:
+        minutes, seconds = divmod(round(duration_seconds), 60)
+        card_lines.append(f"⏱ ദൈർഘ്യം : {minutes:02d}:{seconds:02d}")
+    card_lines.append("➖➖➖➖➖➖➖➖➖➖")
 
     return "\n".join(card_lines)

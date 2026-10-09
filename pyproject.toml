@@ -13,4 +13,4 @@ dependencies = [
 ]
 
 [project.scripts]
-khutbah = "pipeline:main"
+khutbah = "pipeline:run"

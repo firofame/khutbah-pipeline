@@ -2,11 +2,7 @@
 __pycache__/
 *.pyc
 *.pyo
-output/*.txt
-output/*.ogg
-output/*.json
-output/*.mp3
-output/*.wav
+output/
 credentials.json
 archive/
 input_*.txt
